@@ -14,18 +14,22 @@ export class AppComponent {
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      title: ['',
+      task: ['',
         Validators.compose([
           Validators.minLength(3),
           Validators.maxLength(60),
           Validators.required
         ])]
     });
-
-    this.todos.push(new Todo(1, 'Passear com o dog', false));
-    this.todos.push(new Todo(2, 'Ir ao mercado', false));
-    this.todos.push(new Todo(3, 'Cortar o cabelo', true));
   }
+  addTask() {
+    const task = this.form.controls['task'].value;
+    const id = this.todos.length + 1;
+    this.todos.push(new Todo(id, task, false));
+
+    this.form.reset()
+  }
+
   remove(todo: Todo) {
     const index = this.todos.indexOf(todo);
     if (index !== -1) {
