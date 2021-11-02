@@ -1,4 +1,8 @@
 <h1>{{title}}</h1>
 <ul>
-  <li *ngFor="let todo of todos">{{todo.id}}. {{todo.task}}<button>Concluir</button> | <button>Remover</button></li>
+  <li *ngFor="let todo of todos">{{todo.id}}. {{todo.task}}
+    <button *ngIf="!todo.done">Concluir</button> |
+    <button *ngIf="todo.done">Refazer</button> |
+    <button (click)="remove(todo)">Remover</button>
+  </li>
 </ul>
