@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  public mode = 'list';
   public todos: Todo[] = [];
   public title: string = 'Minhas tarefas';
   public form: FormGroup;
@@ -52,9 +53,13 @@ export class AppComponent {
   save() {
     const data = JSON.stringify(this.todos);
     localStorage.setItem('todos', data);
+    this.mode = 'list';
   }
 
   loadTodos() {
     this.todos = JSON.parse(localStorage.getItem('todos')!);
+  }
+  changeMode(mode: string) {
+    this.mode = mode;
   }
 }
